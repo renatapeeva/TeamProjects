@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+        body {
+            margin: 0;
+            font-family:Arial, Helvetica, sans-serif;
+            background-color: #ffffff;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            color: #aaaaaa;
+            padding: 10px 20px;
+            font-family:Arial, Helvetica, sans-serif;
+
+        }
+        .navbar-left {
+            display: flex;
+            align-items: center;
+        }
+        .logo {
+            height: 50px;
+            margin-right: 20px;
+        }
+        .university-name span {
+            font-size: 12px;
+            line-height: 1.2;
+        }
+
+        .navbar-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            gap: 20px;
+        }
+
+        .navbar-center a {
+            color: #aaaaaa;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-center a:hover {
+            color: white;
+        }
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .navbar-right a {
+            color: #aaaaaa;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-right a:hover {
+            color: white;
+        }
+
+        .user-id {
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        .logout {
+            color: #aaaaaa;
+        }
+        a:hover {
+            text-decoration: white;
+        }
+        .container {
+            padding: 20px;
+            font-family:Arial, Helvetica, sans-serif;
+
+        }
+    </style>
+</head>
+<body>
+<div class="navbar">
+    <div class="navbar-left">
+        <img src="http://diplomski.finki.ukim.mk/Images/finki_mk.png" alt="FINKI Logo" class="logo">
+    </div>
+    <div class="navbar-center">
+        <a href="/"><i class="fas fa-home"></i> Почетна</a>
+        <a th:if="${professor != null}" th:href="@{'/topic/professor/' + ${professor.id}}"><i class="fas fa-user"></i> Мои проекти</a>
+        <a th:if="${student != null}" th:href="@{'/topic/details/' + ${student.index}}"><i class="fas fa-users"></i> Тимски проект</a>
+        <a href="#"><i class="fas fa-tools"></i> Процедура за тимски проект</a>
+        <a href="/topics"><i class="fas fa-tasks"></i> Листа на тимски проекти</a>
+    </div>
+    <div class="navbar-right">
+        <span th:if="${professor != null}" class="user-id" th:text="${professor.name}"></span>
+        <span th:if="${student != null}" class="user-id" th:text="${student.index}"></span>
+        <a th:if="${professor != null or student!=null }" href="/login" class="logout"><i class="bi bi-box-arrow-in-left"></i>Одјава</a>
+        <a th:if="${professor == null and student==null }" href="/login" class="logout"><i class="bi bi-box-arrow-in-right"></i>Најава</a>
+    </div>
+</div>
+<div class="container mt-4">
+    <h3>Постапка за пријавување, одбрана и оценa на тимски проект</h3>
+    <hr>
+    <div class="card mt-3">
+        <div class="card-header bg-success">
+            <h5 class="mb-0" style="color: darkgreen">1. Пријава</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-2 font-weight-bold">
+                    валидира
+                </div>
+                <div class="col-md-10">
+                    професор
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-2 font-weight-bold">
+                    опис
+                </div>
+                <div class="col-md-10">
+                    Професорот поставува соодветни теми и им задава опис. Студентот ги листа темите и се пријавува на тема што му е од интерес.
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card mt-3">
+        <div class="card-header bg-success">
+            <h5 class="mb-0" style="color: darkgreen">2. Прифаќање на студентот од професорот</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-2 font-weight-bold">
+                    валидира
+                </div>
+                <div class="col-md-10">
+                    професор
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-2 font-weight-bold">
+                    опис
+                </div>
+                <div class="col-md-10">
+                    Професорот ја гледа листата од пријавени студенти и одбира со кои студенти сака да соработува. Другите студенти ги трга од темата.
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card mt-3">
+        <div class="card-header bg-success">
+            <h5 class="mb-0" style="color: darkgreen">3. Соработка</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-2 font-weight-bold">
+                    валидира
+                </div>
+                <div class="col-md-10">
+                    професор
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-2 font-weight-bold">
+                    опис
+                </div>
+                <div class="col-md-10">
+                    По воспоставена комуникација помеѓу студентите и професорот, започнува процесот на обработка на темата. Професорот задава таскови, а студентите по нивно извршување ги означуваат како 'completed'.
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card mt-3">
+        <div class="card-header bg-success">
+            <h5 class="mb-0" style="color: darkgreen">4. Одобрение на таскови</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-2 font-weight-bold">
+                    валидира
+                </div>
+                <div class="col-md-10">
+                    професор
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-2 font-weight-bold">
+                    опис
+                </div>
+                <div class="col-md-10">
+                    Професорот ги анализира сработените таскови и ги оценува. Има можност да врати комплетиран таск назад, ако не е добро сработен.
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="clear: left; text-align: left; margin-top: 10px; margin-left: 1%; font-size: smaller;">
+        ©2024 ФИНКИ Сите права се задржани
+    </div>
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
